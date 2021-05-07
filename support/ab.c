@@ -273,6 +273,7 @@ struct data {
     apr_interval_time_t waittime; /* between request and reading response */
     apr_interval_time_t ctime;    /* time to connect */
     apr_interval_time_t time;     /* time for connection */
+    apr_time_t request_sent_time; /* When request is completely sent on the wire */
 };
 
 #define ap_min(a,b) (((a)<(b))?(a):(b))
@@ -885,6 +886,15 @@ static void write_request(struct connection * c)
 
 /* calculate and output results */
 
+static int compradrst(struct data * a, struct data * b)
+{
+    if ((a->request_sent_time) < (b->request_sent_time))
+        return -1;
+    if ((a->request_sent_time) > (b->request_sent_time))
+        return +1;
+    return 0;
+}
+
 static int compradre(struct data * a, struct data * b)
 {
     if ((a->ctime) < (b->ctime))
@@ -1033,10 +1043,9 @@ static void output_results(int sig)
             totalwait += s->waittime;
 
 			// writing to the file alireza
-			fprintf(f, "%ld\n", s->waittime);
+			// fprintf(f, "%lu %ld\n", s->request_sent_time, s->waittime);
         }
 
-		fclose(f);
 
         meancon = totalcon / done;
         meantot = total / done;
@@ -1061,6 +1070,19 @@ static void output_results(int sig)
         sdcon = (done > 1) ? sqrt(sdcon / (done - 1)) : 0;
         sdd = (done > 1) ? sqrt(sdd / (done - 1)) : 0;
         sdwait = (done > 1) ? sqrt(sdwait / (done - 1)) : 0;
+
+		// For the trace, alireza
+        qsort(stats, done, sizeof(struct data),
+              (int (*) (const void *, const void *)) compradrst);
+
+        for (i = 0; i < done; i++) {
+            struct data *s = &stats[i];
+
+			// writing to the file alireza
+			fprintf(f, "%lu %ld\n", s->request_sent_time, s->waittime);
+		}
+
+		fclose(f);
 
         /*
          * XXX: what is better; this hideous cast of the compradre function; or
@@ -1512,6 +1534,7 @@ static void close_connection(struct connection * c)
             s->ctime     = ap_max(0, c->connect - c->start);
             s->time      = ap_max(0, c->done - c->start);
             s->waittime  = ap_max(0, c->beginread - c->endwrite);
+			s->request_sent_time = ap_max(0, c->endwrite);
             if (heartbeatres && !(done % heartbeatres)) {
                 fprintf(stderr, "Completed %d requests\n", done);
                 fflush(stderr);
@@ -1784,6 +1807,7 @@ read_more:
             s->ctime     = ap_max(0, c->connect - c->start);
             s->time      = ap_max(0, c->done - c->start);
             s->waittime  = ap_max(0, c->beginread - c->endwrite);
+			s->request_sent_time = ap_max(0, c->endwrite);
             if (heartbeatres && !(done % heartbeatres)) {
                 fprintf(stderr, "Completed %d requests\n", done);
                 fflush(stderr);
