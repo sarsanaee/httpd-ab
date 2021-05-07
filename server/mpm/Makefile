@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/server/mpm
-builddir     = /users/alireza/httpd-2.4.46/server/mpm
-VPATH        = /users/alireza/httpd-2.4.46/server/mpm
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/server/mpm
+builddir     = /users/alireza/testing/httpd-ab/server/mpm
+VPATH        = /users/alireza/testing/httpd-ab/server/mpm
 
 SUBDIRS = $(MPM_SUBDIRS)
 

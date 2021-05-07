@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/test
-builddir     = /users/alireza/httpd-2.4.46/test
-VPATH        = /users/alireza/httpd-2.4.46/test
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/test
+builddir     = /users/alireza/testing/httpd-ab/test
+VPATH        = /users/alireza/testing/httpd-ab/test
 
 # no targets: we don't want to build anything by default. if you want the
 # test programs, then "make test"

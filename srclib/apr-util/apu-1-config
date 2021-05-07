@@ -35,8 +35,8 @@ DBM_LIBS="  "
 
 APRUTIL_LIBNAME="aprutil-${APRUTIL_MAJOR_VERSION}"
 
-APU_SOURCE_DIR="/users/alireza/httpd-2.4.46/srclib/apr-util"
-APU_BUILD_DIR="/users/alireza/httpd-2.4.46/srclib/apr-util"
+APU_SOURCE_DIR="/users/alireza/testing/httpd-ab/srclib/apr-util"
+APU_BUILD_DIR="/users/alireza/testing/httpd-ab/srclib/apr-util"
 APR_XML_EXPAT_OLD="@APR_XML_EXPAT_OLD@"
 APU_DB_VERSION="0"
 

@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46
-builddir     = /users/alireza/httpd-2.4.46
-VPATH        = /users/alireza/httpd-2.4.46
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab
+builddir     = /users/alireza/testing/httpd-ab
+VPATH        = /users/alireza/testing/httpd-ab
 
 SUBDIRS = srclib os server modules support
 CLEAN_SUBDIRS = test

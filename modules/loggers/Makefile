@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/modules/loggers
-builddir     = /users/alireza/httpd-2.4.46/modules/loggers
-VPATH        = /users/alireza/httpd-2.4.46/modules/loggers
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/modules/loggers
+builddir     = /users/alireza/testing/httpd-ab/modules/loggers
+VPATH        = /users/alireza/testing/httpd-ab/modules/loggers
 
 include $(top_srcdir)/build/special.mk
 

@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/support
-builddir     = /users/alireza/httpd-2.4.46/support
-VPATH        = /users/alireza/httpd-2.4.46/support
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/support
+builddir     = /users/alireza/testing/httpd-ab/support
+VPATH        = /users/alireza/testing/httpd-ab/support
 DISTCLEAN_TARGETS = apxs apachectl dbmmanage log_server_status \
 	logresolve.pl phf_abuse_log.cgi split-logfile envvars-std
 

@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/modules/filters
-builddir     = /users/alireza/httpd-2.4.46/modules/filters
-VPATH        = /users/alireza/httpd-2.4.46/modules/filters
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/modules/filters
+builddir     = /users/alireza/testing/httpd-ab/modules/filters
+VPATH        = /users/alireza/testing/httpd-ab/modules/filters
 
 include $(top_srcdir)/build/special.mk
 

@@ -2,10 +2,12 @@
 #
 # Created by configure
 
-"/users/alireza/httpd-2.4.46/srclib/apr/configure" \
+"/users/alireza/testing/httpd-ab/srclib/apr/configure" \
 "--disable-option-checking" \
+"--with-included-apr" \
+"--with-pcre" \
 "--cache-file=/dev/null" \
-"--srcdir=/users/alireza/httpd-2.4.46/srclib/apr" \
+"--srcdir=/users/alireza/testing/httpd-ab/srclib/apr" \
 "--prefix=/usr/local/apache2" \
 "--exec-prefix=/usr/local/apache2" \
 "--libdir=/usr/local/apache2/lib" \

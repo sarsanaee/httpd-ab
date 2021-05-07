@@ -9,7 +9,7 @@ PROGRAMS = \
 TARGETS = $(PROGRAMS) $(NONPORTABLE)
 
 # bring in rules.mk for standard functionality
-include /users/alireza/httpd-2.4.46/srclib/apr/build/apr_rules.mk
+include /users/alireza/testing/httpd-ab/srclib/apr/build/apr_rules.mk
 
 LOCAL_LIBS=../../libapr-${APR_MAJOR_VERSION}.la
 

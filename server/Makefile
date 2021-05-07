@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/server
-builddir     = /users/alireza/httpd-2.4.46/server
-VPATH        = /users/alireza/httpd-2.4.46/server
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/server
+builddir     = /users/alireza/testing/httpd-ab/server
+VPATH        = /users/alireza/testing/httpd-ab/server
 
 CLEAN_TARGETS = gen_test_char test_char.h \
 	ApacheCoreOS2.def httpd.exp export_files \

@@ -24,9 +24,9 @@
 #
 # Configuration variables
 #
-apr_builddir=/users/alireza/httpd-2.4.46/srclib/apr
-apr_builders=/users/alireza/httpd-2.4.46/srclib/apr/build
-top_builddir=/users/alireza/httpd-2.4.46/srclib/apr
+apr_builddir=/users/alireza/testing/httpd-ab/srclib/apr
+apr_builders=/users/alireza/testing/httpd-ab/srclib/apr/build
+top_builddir=/users/alireza/testing/httpd-ab/srclib/apr
 
 # Some layouts require knowing what version we are at.
 APR_MAJOR_VERSION=1

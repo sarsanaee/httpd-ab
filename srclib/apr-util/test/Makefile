@@ -10,7 +10,7 @@ srcdir = .
 #   programs such as sockperf, that have to be invoked in a special sequence
 #   or with special parameters
 
-INCLUDES = -I/users/alireza/httpd-2.4.46/srclib/apr-util/include -I/users/alireza/httpd-2.4.46/srclib/apr-util/include/private  -I/users/alireza/httpd-2.4.46/srclib/apr/include  
+INCLUDES = -I/users/alireza/testing/httpd-ab/srclib/apr-util/include -I/users/alireza/testing/httpd-ab/srclib/apr-util/include/private  -I/users/alireza/testing/httpd-ab/srclib/apr/include  
 
 STDTEST_PORTABLE = dbd testall
 
@@ -28,8 +28,8 @@ LOCAL_LIBS = ../libaprutil-${APRUTIL_MAJOR_VERSION}1.la
 CLEAN_TARGETS = manyfile.bin testfile.txt data/sqlite*.db
 
 # bring in rules.mk for standard functionality
-include /users/alireza/httpd-2.4.46/srclib/apr-util/build/rules.mk
-APRUTIL_LIBS = -lexpat /users/alireza/httpd-2.4.46/srclib/apr/libapr-1.la -luuid -lrt -lcrypt -lpthread -ldl
+include /users/alireza/testing/httpd-ab/srclib/apr-util/build/rules.mk
+APRUTIL_LIBS = -lexpat /users/alireza/testing/httpd-ab/srclib/apr/libapr-1.la -luuid -lrt -lcrypt -lpthread -ldl
 APRUTIL_LDFLAGS = $(ALL_LDFLAGS) -no-install 
 
 # link programs using -no-install to get real executables not

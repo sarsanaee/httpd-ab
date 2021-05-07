@@ -10,9 +10,9 @@ APRUTIL_DOTTED_VERSION=1.6.1
 srcdir = .
 
 
-INCLUDES = -I/users/alireza/httpd-2.4.46/srclib/apr-util/include -I/users/alireza/httpd-2.4.46/srclib/apr-util/include/private  -I/users/alireza/httpd-2.4.46/srclib/apr/include  
+INCLUDES = -I/users/alireza/testing/httpd-ab/srclib/apr-util/include -I/users/alireza/testing/httpd-ab/srclib/apr-util/include/private  -I/users/alireza/testing/httpd-ab/srclib/apr/include  
 APRUTIL_LDFLAGS = 
-APRUTIL_LIBS = -lexpat /users/alireza/httpd-2.4.46/srclib/apr/libapr-1.la -luuid -lrt -lcrypt -lpthread -ldl
+APRUTIL_LIBS = -lexpat /users/alireza/testing/httpd-ab/srclib/apr/libapr-1.la -luuid -lrt -lcrypt -lpthread -ldl
 
 TARGET_LIB = libaprutil-${APRUTIL_MAJOR_VERSION}.la
 INSTALL_SUBDIRS = 
@@ -47,8 +47,8 @@ LDADD_crypto_commoncrypto =
 TARGETS = $(TARGET_LIB) aprutil.exp apu-config.out $(APU_MODULES)
 
 # bring in rules.mk for standard functionality
-include /users/alireza/httpd-2.4.46/srclib/apr-util/build/rules.mk
-include /users/alireza/httpd-2.4.46/srclib/apr-util/build-outputs.mk
+include /users/alireza/testing/httpd-ab/srclib/apr-util/build/rules.mk
+include /users/alireza/testing/httpd-ab/srclib/apr-util/build-outputs.mk
 
 CLEAN_SUBDIRS = test 
 
@@ -68,8 +68,8 @@ exec_prefix=/usr/local/apache2
 bindir=${prefix}/bin
 libdir=${prefix}/lib
 includedir=/usr/local/apache2/include
-top_srcdir=/users/alireza/httpd-2.4.46/srclib/apr-util
-top_blddir=/users/alireza/httpd-2.4.46/srclib/apr-util
+top_srcdir=/users/alireza/testing/httpd-ab/srclib/apr-util
+top_blddir=/users/alireza/testing/httpd-ab/srclib/apr-util
 
 # Create apu-config script suitable for the install tree
 apu-config.out: $(APU_CONFIG)

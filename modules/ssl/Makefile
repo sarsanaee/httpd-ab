@@ -1,8 +1,8 @@
-top_srcdir   = /users/alireza/httpd-2.4.46
-top_builddir = /users/alireza/httpd-2.4.46
-srcdir       = /users/alireza/httpd-2.4.46/modules/ssl
-builddir     = /users/alireza/httpd-2.4.46/modules/ssl
-VPATH        = /users/alireza/httpd-2.4.46/modules/ssl
+top_srcdir   = /users/alireza/testing/httpd-ab
+top_builddir = /users/alireza/testing/httpd-ab
+srcdir       = /users/alireza/testing/httpd-ab/modules/ssl
+builddir     = /users/alireza/testing/httpd-ab/modules/ssl
+VPATH        = /users/alireza/testing/httpd-ab/modules/ssl
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
