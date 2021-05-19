@@ -274,6 +274,7 @@ struct data {
     apr_interval_time_t ctime;    /* time to connect */
     apr_interval_time_t time;     /* time for connection */
     apr_time_t request_sent_time; /* When request is completely sent on the wire */
+    long int response_size;
 };
 
 #define ap_min(a,b) (((a)<(b))?(a):(b))
@@ -318,7 +319,7 @@ const char *gnuplot;          /* GNUplot file */
 const char *csvperc;          /* CSV Percentile file */
 const char *fullurl;
 const char *colonhost;
-const char *fname_latency;
+const char *fname_latency = NULL;
 int isproxy = 0;
 apr_interval_time_t aprtimeout = apr_time_from_sec(30); /* timeout value */
 
@@ -936,15 +937,17 @@ static int compwait(struct data * a, struct data * b)
 static void output_results(int sig)
 {
     double timetaken;
+    int write_trace_file = fname_latency != NULL;
 
-	// Alireza
-	FILE *f = fopen(fname_latency, "w");
-
-	if (f == NULL)
-	{
-		printf("Error opening file!\n");
-		exit(1);
-	}
+    // Alireza
+    FILE *f = NULL;
+    if (write_trace_file) {
+        f = fopen(fname_latency, "w");
+        if (f == NULL) {
+            printf("Error opening file!\n");
+            exit(1);
+        }
+    }
 
     if (sig) {
         lasttime = apr_time_now();  /* record final time if interrupted */
@@ -1042,8 +1045,8 @@ static void output_results(int sig)
             totald += s->time - s->ctime;
             totalwait += s->waittime;
 
-			// writing to the file alireza
-			// fprintf(f, "%lu %ld\n", s->request_sent_time, s->waittime);
+            // writing to the file alireza
+            // fprintf(f, "%lu %ld\n", s->request_sent_time, s->waittime);
         }
 
 
@@ -1071,18 +1074,21 @@ static void output_results(int sig)
         sdd = (done > 1) ? sqrt(sdd / (done - 1)) : 0;
         sdwait = (done > 1) ? sqrt(sdwait / (done - 1)) : 0;
 
-		// For the trace, alireza
-        qsort(stats, done, sizeof(struct data),
-              (int (*) (const void *, const void *)) compradrst);
+        // For the trace, alireza
+        if (write_trace_file) {
+            qsort(stats, done, sizeof(struct data),
+                  (int (*) (const void *, const void *)) compradrst);
 
-        for (i = 0; i < done; i++) {
-            struct data *s = &stats[i];
+            for (i = 0; i < done; i++) {
+                struct data *s = &stats[i];
 
-			// writing to the file alireza
-			fprintf(f, "%lu %ld\n", s->request_sent_time, s->waittime);
-		}
+                // writing to the file alireza
+                fprintf(f, "%lu %ld %ld\n", s->request_sent_time, s->waittime,
+                        s->response_size);
+            }
 
-		fclose(f);
+            fclose(f);
+        }
 
         /*
          * XXX: what is better; this hideous cast of the compradre function; or
@@ -1534,7 +1540,8 @@ static void close_connection(struct connection * c)
             s->ctime     = ap_max(0, c->connect - c->start);
             s->time      = ap_max(0, c->done - c->start);
             s->waittime  = ap_max(0, c->beginread - c->endwrite);
-			s->request_sent_time = ap_max(0, c->endwrite);
+            s->request_sent_time = ap_max(0, c->endwrite);
+            s->response_size = c->read;
             if (heartbeatres && !(done % heartbeatres)) {
                 fprintf(stderr, "Completed %d requests\n", done);
                 fflush(stderr);
@@ -1807,7 +1814,8 @@ read_more:
             s->ctime     = ap_max(0, c->connect - c->start);
             s->time      = ap_max(0, c->done - c->start);
             s->waittime  = ap_max(0, c->beginread - c->endwrite);
-			s->request_sent_time = ap_max(0, c->endwrite);
+            s->request_sent_time = ap_max(0, c->endwrite);
+            s->response_size = c->read;
             if (heartbeatres && !(done % heartbeatres)) {
                 fprintf(stderr, "Completed %d requests\n", done);
                 fflush(stderr);
@@ -2184,6 +2192,7 @@ static void usage(const char *progname)
     fprintf(stderr, "    -e filename     Output CSV file with percentages served\n");
     fprintf(stderr, "    -r              Don't exit on socket receive errors.\n");
     fprintf(stderr, "    -m method       Method name\n");
+    fprintf(stderr, "    -a filename     Output latency traces to this file\n");
     fprintf(stderr, "    -h              Display usage information (this message)\n");
 #ifdef USE_SSL
 
@@ -2392,10 +2401,10 @@ int main(int argc, const char * const argv[])
                     err("Invalid number of requests\n");
                 }
                 break;
-			case 'a':
-				fname_latency = xstrdup(opt_arg);
-				printf("%s", fname_latency);
-				break;
+            case 'a':
+                fname_latency = xstrdup(opt_arg);
+                printf("%s", fname_latency);
+                break;
             case 'k':
                 keepalive = 1;
                 break;
@@ -2710,7 +2719,7 @@ int main(int argc, const char * const argv[])
     if (ssl_cert != NULL) {
         if (SSL_CTX_use_certificate_chain_file(ssl_ctx, ssl_cert) <= 0) {
             BIO_printf(bio_err, "unable to get certificate from '%s'\n",
-            		ssl_cert);
+                    ssl_cert);
             ERR_print_errors(bio_err);
             exit(1);
         }
