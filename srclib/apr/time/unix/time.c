@@ -73,9 +73,12 @@ APR_DECLARE(apr_status_t) apr_time_ansi_put(apr_time_t *result,
 /* NB NB NB NB This returns GMT!!!!!!!!!! */
 APR_DECLARE(apr_time_t) apr_time_now(void)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * APR_USEC_PER_SEC + tv.tv_usec;
+    // struct timeval tv;
+    // gettimeofday(&tv, NULL);
+    // return tv.tv_sec * APR_USEC_PER_SEC + tv.tv_usec;
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec * 1000000000L + ts.tv_nsec;
 }
 
 static void explode_time(apr_time_exp_t *xt, apr_time_t t,
